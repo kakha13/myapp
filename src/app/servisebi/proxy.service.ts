@@ -29,7 +29,7 @@
 
 // proxy.service.ts
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -56,6 +56,20 @@ export class ProxyService {
   addProduct(productData: any): Observable<any> {
     const url = 'https://fakestoreapi.com/products'; // Endpoint for adding a new product
     return this.http.post(url, productData);
+  }
+
+  addCart(productData: any): Observable<any> {
+    const url = 'https://fakestoreapi.com/carts';
+
+
+    const body =
+    {
+      userId: 5,
+      date: "2020-02-03",
+      products: [{ productId: productData.id, quantity: 1 }]
+    };
+   
+    return this.http.post(url, body);
   }
 }
 
